@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Live Object Detection</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 20px;
+      }
+      h1 {
+        color: #333;
+      }
+      .video-container {
+        margin-top: 20px;
+        border: 2px solid #333;
+        width: 100%;
+        max-width: 640px;
+        position: relative;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      #videoFeed {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+      .control-buttons {
+        margin-top: 20px;
+        display: flex;
+        gap: 10px;
+      }
+      button {
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      button:disabled {
+        cursor: not-allowed;
+        background-color: #ccc;
+      }
+      #startButton {
+        background-color: #4caf50;
+        color: white;
+      }
+      #startButton:hover:not(:disabled) {
+        background-color: #45a049;
+      }
+      #stopButton {
+        background-color: #f44336;
+        color: white;
+      }
+      #stopButton:hover:not(:disabled) {
+        background-color: #e53935;
+      }
+      #statusText {
+        margin-top: 10px;
+        font-size: 14px;
+        color: #666;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Live Object Detection</h1>
+
+    <div class="video-container">
+      <img
+        id="videoFeed"
+        src="{{ url_for('video_feed') }}"
+        alt="Live video feed"
+      />
+    </div>
+
+    <div class="control-buttons">
+      <button id="startButton" onclick="startDetection()">
+        Start Detection
+      </button>
+      <button id="stopButton" onclick="stopDetection()" disabled>
+        Stop Detection
+      </button>
+    </div>
+
+    <p id="statusText">Click "Start Detection" to begin.</p>
+
+    <script>
+      let isDetectionRunning = false;
+
+      function startDetection() {
+        if (!isDetectionRunning) {
+          console.log("Detection started.");
+          isDetectionRunning = true;
+          document.getElementById("startButton").disabled = true;
+          document.getElementById("stopButton").disabled = false;
+          document.getElementById("statusText").textContent =
+            "Detection is running...";
+        }
+      }
+
+      function stopDetection() {
+        if (isDetectionRunning) {
+          console.log("Detection stopped.");
+          isDetectionRunning = false;
+          document.getElementById("startButton").disabled = false;
+          document.getElementById("stopButton").disabled = true;
+          document.getElementById("statusText").textContent =
+            "Detection stopped. Click 'Start Detection' to resume.";
+        }
+      }
+    </script>
+  </body>
+</html>

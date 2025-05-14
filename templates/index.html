@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vision AI</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <style>
+      body {
+        background-image: url("{{ url_for('static', filename='images/bg.png') }}");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 100vh;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-family: Arial, sans-serif;
+      }
+
+      h1 {
+        color: white;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        margin-bottom: 20px;
+      }
+
+      .card {
+        margin: 20px;
+        width: 300px;
+      }
+
+      .card-body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+
+      .btn {
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1><i>ECOSIGHT</i></h1>
+
+    <div class="d-flex flex-row">
+      <!-- Card for Image to Speech (OCR) -->
+      <div class="card text-center">
+        <div class="card-body">
+          <h5 class="card-title">Image to Speech</h5>
+          <p class="card-text">Upload an image to convert it to speech.</p>
+          <a href="{{ url_for('upload_image') }}" class="btn btn-primary"
+            >Upload Image</a
+          >
+        </div>
+      </div>
+
+      <!-- Card for Object and Face Detection -->
+      <div class="card text-center">
+        <div class="card-body">
+          <h5 class="card-title">Object and Face Detection</h5>
+          <p class="card-text">
+            Use the camera for real-time object detection.
+          </p>
+          <button
+            onclick="window.location.href='{{ url_for('run_detection') }}'"
+            class="btn btn-primary"
+          >
+            Open Camera for Object Detection
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

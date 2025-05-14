@@ -1,0 +1,10 @@
+flask
+pytesseract
+gtts
+OpenCV
+tensorflow
+pillow
+pygame
+torch
+numpy
+pandas
